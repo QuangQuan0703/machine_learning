@@ -74,13 +74,9 @@ print(test_images.shape, test_labels.shape)
 
 from sklearn.decomposition import PCA
 
-
 pca3D = PCA(n_components=3)
-
 pca3D.fit(train_images)
-
 pac_transform3D = pca3D.transform(train_images)
-
 
 fig3 = plt.figure()
 fig3.set_size_inches(10,10)
@@ -88,7 +84,10 @@ ax = plt.axes(projection='3d')
 colors = ['red','blue','green','brown', 'orange', 'black', 'pink','purple','gray','yellow']
 
 for label in range(10):
-    ax.scatter(pac_transform3D[train_labels==label,0], pac_transform3D[train_labels==label,1], pac_transform3D[train_labels==label, 2], s= 5, c = colors[label])
+    ax.scatter(pac_transform3D[train_labels==label,0],
+                pac_transform3D[train_labels==label,1],
+                pac_transform3D[train_labels==label, 2],
+                s= 5, c = colors[label])
     
 ax.set_title('decomposition')
 plt.show()
@@ -100,15 +99,17 @@ pac_transform2D = pca2D.transform(train_images)
 
 fig2 = plt.figure()
 fig2.set_size_inches(10,10)
-colors = ['red','blue','green','brown', 'orange', 'black', 'pink','purple','gray','yellow']
 for label in range(10):
-    plt.scatter(pac_transform2D[train_labels==label,0], pac_transform2D[train_labels==label,1],s=5, c = colors[label])
+    plt.scatter(pac_transform2D[train_labels==label,0],
+                pac_transform2D[train_labels==label,1],
+                s=5, c = colors[label])
 plt.show()
 
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 from sklearn.naive_bayes import MultinomialNB
-clf = MultinomialNB()
+from sklearn.naive_bayes import BernoulliNB
+clf =MultinomialNB()
 clf.fit(train_images, train_labels)
 
 
@@ -138,4 +139,7 @@ print("Accuracy:", accuracyMultinomial)
 print("Confusion matrix:\n", confusionMatrixMultinomial)
 print("Precision:", precisionMultinomial)
 print("Recall:", recallMultinomial)
+
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------
 
